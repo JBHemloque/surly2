@@ -1,6 +1,6 @@
 {
   "name": "surly2",
-  "version": "2.0.0-beta",
+  "version": "2.0.1-beta",
   "description": "An AIML interpreter",
   "main": "src/Surly.js",
   "scripts": {
