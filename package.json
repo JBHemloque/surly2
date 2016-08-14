@@ -11,8 +11,11 @@
   "dependencies": {
     "async": "^1.5.2",
     "fs": "0.0.2",
-    "libxmljs": "^0.17.1",
+    "libxmljs": "^0.18.0",
     "node-xmpp-client": "^3.0.0",
     "rc": "^1.1.6"
+  },
+  "scripts": {
+    "test": "mocha test -R nyan"
   }
 }
