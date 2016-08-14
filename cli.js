@@ -3,7 +3,8 @@
 var pkg = require('./package.json');
 var Surly = require('./src/Surly');
 var conf = require('rc')('surly', {
-    brain: '',      b: '',
+    brain: '',
+    b: '',
     help: false,
     version: false
 });
@@ -31,22 +32,21 @@ if (options.version) {
 }
 
 var bot = new Surly({
-  brain: options.brain
+    brain: options.brain
+}, function() {
+    console.log('--- AIML files loaded ---\n\nSurly: Hello! Type quit to quit or /help for unhelpful help.');
 });
 
-console.log('Surly: Hello! Type quit to quit or /help for unhelpful help.');
-process.stdout.write(prompt);
+var lineReader = require('readline').createInterface({
+    input: process.stdin, output: process.stdout
+});
+lineReader.setPrompt(prompt);
 
-process.stdin.addListener('data', function (d) {
-	var sentence = d.toString().substring(0, d.length - 1);
-
-	if (sentence === 'quit' || sentence === 'exit') {
-		console.log('Yeah, fuck off.');
-		process.exit(0);
-	}
-
-  bot.talk(sentence, function (err, response) {
-    console.log('Surly: ' + response);
-    process.stdout.write(prompt);
-  });
+lineReader.on('line', function(line) {
+    if (line === 'quit' || line === 'exit') {
+        process.exit(0);
+    }
+    bot.talk(line, function(err, response) {
+        console.log('Surly: ' + response);
+    });
 });

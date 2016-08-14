@@ -7,7 +7,8 @@ const Environment = require('./Environment');
 const Logger = require('./Logger');
 
 module.exports = class Surly {
-  constructor (options) {
+  // callback gets called when Surly has loaded everything
+  constructor (options, callback) {
     this.log = new Logger();
     this.brain = [];
     this.input_stack = new Stack(10);
@@ -17,7 +18,7 @@ module.exports = class Surly {
     this.aiml = new Aiml({
       surly: this
     });
-    this.aiml.loadDir(options.brain);
+    this.aiml.loadDir(options.brain, callback);
     this.environment.aiml = this.aiml; // @todo this is getting circular. Hmmm.
   }
 

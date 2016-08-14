@@ -120,20 +120,21 @@ module.exports = class Aiml {
    */
   loadDir (dir, callback) {
     var files = fs.readdirSync(dir);
+    var that = this;
 
     this.log.debug('Loading dir' + dir);
 
-    for (var i in files) {
-      if (!files.hasOwnProperty(i)) continue;
-
-      var name = dir + '/' + files[i];
+    async.eachOf(files, function(value, key, cb) {
+      var name = dir + "/" + value;
 
       if (fs.statSync(name).isDirectory()) {
-        this.log.debug('Ignoring directory: ' + name);
+        that.loadDir(name, cb);
       } else if (name.substr(-5).toLowerCase() === '.aiml') {
-        this.loadFile(name, callback);
+        that.loadFile(name, cb);
+      } else {
+        cb();
       }
-    }
+    }, callback);
   }
 
   /**
@@ -149,6 +150,9 @@ module.exports = class Aiml {
       }
 
       this.parseAiml(xml);
+      if (callback) {
+        callback();
+      }
     }.bind(this));
   }
 
