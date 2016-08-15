@@ -28,4 +28,14 @@
 		<pattern>DATE</pattern>
 		<template><date /></template>
 	</category>
+
+	<category>
+		<pattern>SIZE</pattern>
+		<template><size /></template>
+	</category>
+
+	<category>
+		<pattern>RANDOM</pattern>
+		<template><random><li>one</li><li>two</li><li>three</li></random></template>
+	</category>
 </aiml>

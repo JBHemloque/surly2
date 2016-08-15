@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <aiml>
 	<category>
-		<pattern>BOT </pattern>
+		<pattern>BOT</pattern>
 		<template>Set bot.'user' to 'foo'.<bot name="user">foo</bot></template>
 	</category>
-
-	<!-- TODO: How to *get* bot attributes? -->
 </aiml>
