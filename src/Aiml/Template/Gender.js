@@ -51,21 +51,21 @@ var BaseNode = require('../BaseNode');
  * the implementation. 
  */
 module.exports = class Gender extends BaseNode {
-  constructor (node, surly) {
-    super(node, surly);
-    this.type = 'gender';
+    constructor(node, surly) {
+        super(node, surly);
+        this.type = 'gender';
 
-    if (node.childNodes().length === 0) {
-      var star = new libxmljs.Element(node.doc(), 'star');
-      this.children.push(new Star(star, surly));
+        if (node.childNodes().length === 0) {
+            var star = new libxmljs.Element(node.doc(), 'star');
+            this.children.push(new Star(star, surly));
+        }
     }
-  }
 
-  getText (callback) {
-    this.evaluateChildren(function (err, text) {
-      callback(err, substitute(text, 'gender'));
-    });
-  }
+    getText(callback) {
+        this.evaluateChildren(function(err, text) {
+            callback(err, substitute(text, 'gender'));
+        });
+    }
 };
 
 const libxmljs = require('libxmljs');

@@ -17,9 +17,9 @@ var BaseNode = require('../BaseNode');
  * </aiml:random>
  */
 module.exports = class Random extends BaseNode {
-  getText (callback) {
-    var elem = this.children[Math.floor(Math.random() * this.children.length)];
+    getText(callback) {
+        var elem = this.children[Math.floor(Math.random() * this.children.length)];
 
-    elem.getText(callback);
-  }
+        elem.getText(callback);
+    }
 };

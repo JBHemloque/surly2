@@ -22,9 +22,9 @@ var BaseNode = require('../BaseNode');
  * See Unicode Case Mapping for implementation suggestions.
  */
 module.exports = class Lowercase extends BaseNode {
-  getText (callback) {
-    this.evaluateChildren(function (err, text) {
-      callback(err, text.toLowerCase());
-    });
-  }
+    getText(callback) {
+        this.evaluateChildren(function(err, text) {
+            callback(err, text.toLowerCase());
+        });
+    }
 };

@@ -15,14 +15,14 @@ var BaseNode = require('../BaseNode');
  * <aiml:sr/>
  */
 module.exports = class Sr extends BaseNode {
-  constructor (node, surly) {
-    super(node, surly);
-    this.type = 'sr';
-    this.surly = surly;
-  }
+    constructor(node, surly) {
+        super(node, surly);
+        this.type = 'sr';
+        this.surly = surly;
+    }
 
-  getText (callback) {
-    var star = this.surly.environment.wildcard_stack.getLast();
-    this.surly.talk(star[0], callback);
-  }
+    getText(callback) {
+        var star = this.surly.environment.wildcard_stack.getLast();
+        this.surly.talk(star[0], callback);
+    }
 };

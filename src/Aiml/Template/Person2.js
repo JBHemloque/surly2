@@ -47,21 +47,21 @@ var BaseNode = require('../BaseNode');
  * implementation.
  */
 module.exports = class Person2 extends BaseNode {
-  constructor (node, surly) {
-    super(node, surly);
-    this.type = 'person2';
+    constructor(node, surly) {
+        super(node, surly);
+        this.type = 'person2';
 
-    if (node.childNodes().length === 0) {
-      var star = new libxmljs.Element(node.doc(), 'star');
-      this.children.push(new Star(star, surly));
+        if (node.childNodes().length === 0) {
+            var star = new libxmljs.Element(node.doc(), 'star');
+            this.children.push(new Star(star, surly));
+        }
     }
-  }
 
-  getText (callback) {
-    this.evaluateChildren(function (err, text) {
-      callback(err, substitute(text, 'person2'));
-    });
-  }
+    getText(callback) {
+        this.evaluateChildren(function(err, text) {
+            callback(err, substitute(text, 'person2'));
+        });
+    }
 };
 
 const libxmljs = require('libxmljs');

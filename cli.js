@@ -38,7 +38,8 @@ var bot = new Surly({
 });
 
 var lineReader = require('readline').createInterface({
-    input: process.stdin, output: process.stdout
+    input: process.stdin,
+    output: process.stdout
 });
 lineReader.setPrompt(prompt);
 

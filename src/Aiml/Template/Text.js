@@ -10,30 +10,30 @@
  */
 module.exports = class Text {
 
-  /**
-   * Constructor method
-   * @param  {Node} node Xmllibjs node object
-   */
-  constructor (node, surly) {
-    this.children = [];
-    this.type = 'text';
+    /**
+     * Constructor method
+     * @param  {Node} node Xmllibjs node object
+     */
+    constructor(node, surly) {
+        this.children = [];
+        this.type = 'text';
 
-    if (typeof node === 'string') {
-      this.content = node;
-    } else {
-      this.content = node.toString();
+        if (typeof node === 'string') {
+            this.content = node;
+        } else {
+            this.content = node.toString();
+        }
     }
-  }
 
-  getType() {
-    return this.type;
-  }
+    getType() {
+        return this.type;
+    }
 
-  /**
-   * Return the node and any children as text
-   * @return {String}
-   */
-  getText (callback) { // function (err, output)
-    callback(null, this.content);
-  }
+    /**
+     * Return the node and any children as text
+     * @return {String}
+     */
+    getText(callback) { // function (err, output)
+        callback(null, this.content);
+    }
 };

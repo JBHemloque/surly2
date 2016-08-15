@@ -23,22 +23,22 @@ var Surly = require('../../Surly');
  */
 module.exports = class Srai extends BaseNode {
 
-  /**
-   * Constructor method
-   * @param  {Node} node Xmllibjs node object
-   */
-  constructor (node, surly) {
-    super(node, surly);
-    this.type = 'srai';
-    this.content = node.text().toString();
-  }
+    /**
+     * Constructor method
+     * @param  {Node} node Xmllibjs node object
+     */
+    constructor(node, surly) {
+        super(node, surly);
+        this.type = 'srai';
+        this.content = node.text().toString();
+    }
 
-  /**
-   * Return content as text
-   * @return {String}
-   */
-  getText (callback) {
-    // @todo - make this work!
-    this.surly.talk(this.content, callback);
-  }
+    /**
+     * Return content as text
+     * @return {String}
+     */
+    getText(callback) {
+        // @todo - make this work!
+        this.surly.talk(this.content, callback);
+    }
 };

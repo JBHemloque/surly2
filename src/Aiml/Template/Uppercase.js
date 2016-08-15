@@ -21,9 +21,9 @@ var BaseNode = require('../BaseNode');
  * See Unicode Case Mapping for implementation suggestions. 
  */
 module.exports = class Uppercase extends BaseNode {
-  getText (callback) {
-    this.evaluateChildren(function (err, text) {
-      callback(err, text.toUpperCase());
-    });
-  }
+    getText(callback) {
+        this.evaluateChildren(function(err, text) {
+            callback(err, text.toUpperCase());
+        });
+    }
 };

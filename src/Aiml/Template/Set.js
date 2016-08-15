@@ -32,18 +32,18 @@ var BaseNode = require('../BaseNode');
  * </aiml:set>
  */
 module.exports = class Set extends BaseNode {
-  constructor (node, surly) {
-    super(node, surly);
-    this.type = 'set';
-    this.name = node.attr('name').value();
-  }
+    constructor(node, surly) {
+        super(node, surly);
+        this.type = 'set';
+        this.name = node.attr('name').value();
+    }
 
-  getText (callback) {
-    super.evaluateChildren(function (err, text) {
-      this.surly.environment.setVariable(this.name, text);
-    }.bind(this));
+    getText(callback) {
+        super.evaluateChildren(function(err, text) {
+            this.surly.environment.setVariable(this.name, text);
+        }.bind(this));
 
-    // @todo implement return-name-when-set. See AIML spec section 7.4.1
-    callback(null, '');
-  }
+        // @todo implement return-name-when-set. See AIML spec section 7.4.1
+        callback(null, '');
+    }
 };

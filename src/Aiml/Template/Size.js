@@ -15,11 +15,11 @@ var BaseNode = require('../BaseNode');
  * <aiml:size/>
  */
 module.exports = class Size extends BaseNode {
-  constructor (node, surly) {
-    super(node, surly);
-  }
+    constructor(node, surly) {
+        super(node, surly);
+    }
 
-  getText (callback) {
-    callback(null, this.surly.environment.countCategories());
-  }
+    getText(callback) {
+        callback(null, this.surly.environment.countCategories());
+    }
 };

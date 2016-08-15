@@ -28,8 +28,8 @@ var BaseNode = require('../BaseNode');
  * </aiml:that>
  */
 module.exports = class PatternThat extends BaseNode {
-  constructor (node, surly, category) {
-    super(node, surly);
-    this.category = category;
-  }
+    constructor(node, surly, category) {
+        super(node, surly);
+        this.category = category;
+    }
 };

@@ -47,21 +47,21 @@ var BaseNode = require('../BaseNode');
  */
 
 module.exports = class Person extends BaseNode {
-  constructor (node, surly) {
-    super(node, surly);
-    this.type = 'person';
+    constructor(node, surly) {
+        super(node, surly);
+        this.type = 'person';
 
-    if (node.childNodes().length === 0) {
-      var star = new libxmljs.Element(node.doc(), 'star');
-      this.children.push(new Star(star, surly));
+        if (node.childNodes().length === 0) {
+            var star = new libxmljs.Element(node.doc(), 'star');
+            this.children.push(new Star(star, surly));
+        }
     }
-  }
 
-  getText (callback) {
-    this.evaluateChildren(function (err, text) {
-      callback(err, substitute(text, 'person'));
-    });
-  }
+    getText(callback) {
+        this.evaluateChildren(function(err, text) {
+            callback(err, substitute(text, 'person'));
+        });
+    }
 };
 
 const libxmljs = require('libxmljs');

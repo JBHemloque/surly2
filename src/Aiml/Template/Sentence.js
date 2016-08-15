@@ -24,22 +24,22 @@ var BaseNode = require('../BaseNode');
  * See Unicode Case Mapping for implementation suggestions. 
  */
 module.exports = class Sentence extends BaseNode {
-  getText (callback) {
-    this.evaluateChildren(function (err, text) {
-      var sentences = text.toLowerCase().split('.');
+    getText(callback) {
+        this.evaluateChildren(function(err, text) {
+            var sentences = text.toLowerCase().split('.');
 
-      for (var i = 0; i < sentences.length; i++) {
-        sentences[i] = sentences[i].trim();
+            for (var i = 0; i < sentences.length; i++) {
+                sentences[i] = sentences[i].trim();
 
-        if (sentences[i].length === 0) {
-          continue;
-        }
-        sentences[i] = sentences[i][0].toUpperCase() + sentences[i].slice(1);
-      }
+                if (sentences[i].length === 0) {
+                    continue;
+                }
+                sentences[i] = sentences[i][0].toUpperCase() + sentences[i].slice(1);
+            }
 
-      text = sentences.join('. ');
+            text = sentences.join('. ');
 
-      callback(err, text);
-    });
-  }
+            callback(err, text);
+        });
+    }
 };

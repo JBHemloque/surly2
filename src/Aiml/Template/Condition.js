@@ -26,64 +26,64 @@ var BaseNode = require('../BaseNode');
  * </condition>
  */
 module.exports = class Condition extends BaseNode {
-  constructor (node, surly) {
-    super(node, surly);
-    this.type = 'condition';
-    var name = node.attr('name');
-    var value = node.attr('value');
+    constructor(node, surly) {
+        super(node, surly);
+        this.type = 'condition';
+        var name = node.attr('name');
+        var value = node.attr('value');
 
-    if (name !== null && value !== null) {
-      this.conditional_type = 'blockCondition';
-      this.name = name.value();
-      this.value = value.value().toUpperCase();
-    } else if (name !== null) {
-      this.conditional_type = 'singlePredicateCondition';
-      this.filterNonLiChildren();
-      this.name = name.value();
-      // Set the name on the children, then we can treat it the same as a
-      // multiPredicateCondition when we use it later
-      for (var i = 0; i < this.children.length; i++) {
-        this.children[i].name = this.name;
-      }
-    } else {
-      this.conditional_type = 'multiPredicateCondition';
-      this.filterNonLiChildren();
-    }
-  }
-
-  /**
-   * Removes child elements that aren't LI elements.
-   */
-  filterNonLiChildren () {
-    this.children = this.children.filter(function (item) {
-      return item.type === 'li';
-    });
-  }
-
-  getText (callback) {
-    switch (this.conditional_type) {
-      case 'blockCondition':
-        var value = this.surly.environment.getVariable(this.name);
-
-        if (value === this.value) {
-          this.evaluateChildren(callback);
+        if (name !== null && value !== null) {
+            this.conditional_type = 'blockCondition';
+            this.name = name.value();
+            this.value = value.value().toUpperCase();
+        } else if (name !== null) {
+            this.conditional_type = 'singlePredicateCondition';
+            this.filterNonLiChildren();
+            this.name = name.value();
+            // Set the name on the children, then we can treat it the same as a
+            // multiPredicateCondition when we use it later
+            for (var i = 0; i < this.children.length; i++) {
+                this.children[i].name = this.name;
+            }
         } else {
-          callback(null, '');
+            this.conditional_type = 'multiPredicateCondition';
+            this.filterNonLiChildren();
         }
-
-        break;
-      case 'singlePredicateCondition':
-      case 'multiPredicateCondition':
-        for (var i = 0; i < this.children.length; i++) {
-          var actual_value = this.surly.environment.getVariable(this.children[i].name);
-
-          if (actual_value.toUpperCase() === this.children[i].value.toUpperCase()) {
-            this.children[i].getText(callback);
-            return;
-          }
-        }
-        callback(null, '');
-        break;
     }
-  }
+
+    /**
+     * Removes child elements that aren't LI elements.
+     */
+    filterNonLiChildren() {
+        this.children = this.children.filter(function(item) {
+            return item.type === 'li';
+        });
+    }
+
+    getText(callback) {
+        switch (this.conditional_type) {
+            case 'blockCondition':
+                var value = this.surly.environment.getVariable(this.name);
+
+                if (value === this.value) {
+                    this.evaluateChildren(callback);
+                } else {
+                    callback(null, '');
+                }
+
+                break;
+            case 'singlePredicateCondition':
+            case 'multiPredicateCondition':
+                for (var i = 0; i < this.children.length; i++) {
+                    var actual_value = this.surly.environment.getVariable(this.children[i].name);
+
+                    if (actual_value.toUpperCase() === this.children[i].value.toUpperCase()) {
+                        this.children[i].getText(callback);
+                        return;
+                    }
+                }
+                callback(null, '');
+                break;
+        }
+    }
 };

@@ -15,15 +15,15 @@ var pkg = require('../../../package.json');
  * <aiml:version/>
  */
 module.exports = class Version {
-  constructor () {
-    this.type = 'version';
-  }
+    constructor() {
+        this.type = 'version';
+    }
 
-  getType () {
-    return this.type;
-  }
+    getType() {
+        return this.type;
+    }
 
-  getText (callback) {
-    callback(null, pkg.version);
-  }
+    getText(callback) {
+        callback(null, pkg.version);
+    }
 };

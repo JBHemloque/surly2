@@ -18,15 +18,15 @@ var BaseNode = require('../BaseNode');
  *    <!-- Contents: aiml-template-elements -->
  * </aiml:think>
  */
-module.exports = class Think extends BaseNode{
-  constructor (node, surly) {
-    super(node, surly);
-    this.type = 'think';
-  }
+module.exports = class Think extends BaseNode {
+    constructor(node, surly) {
+        super(node, surly);
+        this.type = 'think';
+    }
 
-  getText (callback) {
-    super.evaluateChildren(function (err, text) {
-      callback(null, '');
-    }.bind(this));
-  }
+    getText(callback) {
+        super.evaluateChildren(function(err, text) {
+            callback(null, '');
+        }.bind(this));
+    }
 };

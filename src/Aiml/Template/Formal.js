@@ -23,14 +23,14 @@ var BaseNode = require('../BaseNode');
  * See Unicode Case Mapping for implementation suggestions.
  */
 module.exports = class Formal extends BaseNode {
-  getText (callback) {
-    this.evaluateChildren(function (err, text) {
-      text = text
-        .toLowerCase()
-        .replace(/(?:^|\s)\S/g, function(a) {
-          return a.toUpperCase();
+    getText(callback) {
+        this.evaluateChildren(function(err, text) {
+            text = text
+                .toLowerCase()
+                .replace(/(?:^|\s)\S/g, function(a) {
+                    return a.toUpperCase();
+                });
+            callback(err, text);
         });
-      callback(err, text);
-    });
-  }
+    }
 };

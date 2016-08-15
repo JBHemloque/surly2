@@ -16,12 +16,12 @@ var BaseNode = require('../BaseNode');
  * <aiml:date/>
  */
 module.exports = class DateNode extends BaseNode {
-  constructor(node, surly) {
-    super(node, surly);
-    this.type = 'date';
-  }
+    constructor(node, surly) {
+        super(node, surly);
+        this.type = 'date';
+    }
 
-  getText(callback) {
-    callback(false, new Date().toISOString()); // @todo - nice formatting
-  }
+    getText(callback) {
+        callback(false, new Date().toISOString()); // @todo - nice formatting
+    }
 };
