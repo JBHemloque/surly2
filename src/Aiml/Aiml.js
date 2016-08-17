@@ -16,6 +16,9 @@ module.exports = class Aiml {
         this.surly = options.surly;
         this.wipe();
         this.categories = [];
+        this.tempHighCats = [];
+        this.tempMedCats = [];
+        this.tempLowCats = [];
         this.log = new Logger();
     }
 
@@ -29,11 +32,31 @@ module.exports = class Aiml {
     }
 
     /**
+     * Push a category into the appropriate array based on precedence
+     * @param {Category} cat    A category
+     */
+    pushCategory(cat) {
+        if (cat) {
+            if (cat.pattern.text_pattern.includes('_')) {
+                this.tempHighCats.push(cat);
+            } else if (cat.pattern.text_pattern.includes('*')) {
+                this.tempLowCats.push(cat);
+            } else {
+                this.tempMedCats.push(cat);
+            }
+        }
+    }
+
+    /**
      * Load an AIML string
      * @param {String} aiml    A whole AIML file
      */
     parseAiml(aiml) {
         this.log.debug('parsing aiml...');
+
+        this.tempHighCats = [];
+        this.tempMedCats = [];
+        this.tempLowCats = [];
 
         var xmlDoc = libxmljs.parseXmlString(aiml),
             topics = xmlDoc.find('topic'),
@@ -48,7 +71,7 @@ module.exports = class Aiml {
             topic_cats = topics[i].find('category');
 
             for (j = 0; j < topic_cats.length; j++) {
-                this.categories.push(new Category(topic_cats[j], this.surly, topic_name));
+                this.pushCategory(new Category(topic_cats[j], this.surly, topic_name));
             }
         }
 
@@ -56,8 +79,22 @@ module.exports = class Aiml {
         this.log.debug('Loading ' + this.categories.length + ' categories.');
 
         for (i = 0; i < categories.length; i++) {
-            this.categories.push(new Category(categories[i], this.surly));
+            this.pushCategory(new Category(categories[i], this.surly));
         }
+
+        // Now that we have all the categories, let's append them to this.categories in precidence order
+        for (i = 0; i < this.tempHighCats.length; i++) {
+            this.categories.push(this.tempHighCats[i]);
+        }
+        for (i = 0; i < this.tempMedCats.length; i++) {
+            this.categories.push(this.tempMedCats[i]);
+        }
+        for (i = 0; i < this.tempLowCats.length; i++) {
+            this.categories.push(this.tempLowCats[i]);
+        }
+        this.tempHighCats = [];
+        this.tempMedCats = [];
+        this.tempLowCats = [];
 
         this.showCategories();
     }
